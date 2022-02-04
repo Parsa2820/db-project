@@ -12,4 +12,5 @@
 \contentsline {section}{\numberline {3}فاز ۱}{4}%
 \contentsline {section}{\numberline {4}فاز ۲}{4}%
 \contentsline {section}{\numberline {5}فاز ۳}{4}%
-\contentsline {subsection}{\numberline {5.1}دامنه‌های صفات، محدودیت‌های جامعیتی، رهانا و نرمال‌}{4}%
+\contentsline {subsection}{\numberline {5.1}دامنه‌های صفات‌}{4}%
+\contentsline {subsubsection}{\numberline {5.1.1}کارمندان (Employee)}{5}%
