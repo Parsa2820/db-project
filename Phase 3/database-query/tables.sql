@@ -25,7 +25,8 @@ CREATE TABLE Employee (
     country varchar(50),
     city varchar(50),
     addresExtra text,
-    PRIMARY KEY(nationalId)
+    PRIMARY KEY(nationalId),
+    CHECK (EXTRACT (YEAR from age(CURRENT_TIMESTAMP, birthDate::timestamp)) > 18)
 );
 
 -- weekday enum
@@ -60,7 +61,8 @@ CREATE TABLE RealPerson (
     country varchar(50),
     city varchar(50),
     addresExtra text,
-    PRIMARY KEY(nationalId)
+    PRIMARY KEY(nationalId),
+    CHECK (EXTRACT (YEAR from age(CURRENT_TIMESTAMP, birthDate::timestamp)) > 18)
 );
 
 CREATE TABLE Account (
