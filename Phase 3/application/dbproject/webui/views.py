@@ -34,7 +34,9 @@ def home(request):
             delete(request, context)
         elif BUTTON_SEARCH_KEY in request.POST:
             search(request, context)
-    return render(request, 'webui/home.html', context)
+        else:
+            insert(request, context)
+    return render(request, 'webui/home2.html', context)
 
 
 def delete(request, context):
@@ -48,6 +50,13 @@ def delete(request, context):
             model.objects.filter(**{field_name: field_value}).delete()
         except FieldError:
             pass
+
+
+def insert(request, context):
+    table_name = request.POST.get(REQUEST_TABLE_KEY, None)
+    if table_name:
+        model = apps.get_model('webui', table_name)
+        
 
 
 def search(request, context):
@@ -64,6 +73,10 @@ def search(request, context):
             pass
     elif table_name:
         context['data'] = [x.__dict__ for x in model.objects.all()]
+
+
+def insert(request):
+    return render(request, 'webui/insert.html')
 
 
 def about(request):
