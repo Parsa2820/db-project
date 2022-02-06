@@ -8,8 +8,7 @@ from django.core.exceptions import FieldError
 from django.db.models import Field
 from django.forms.models import model_to_dict
 from django.apps import apps
-import json
-from ast import literal_eval
+from .forms import *
 
 from pytest import Instance
 
@@ -35,7 +34,7 @@ def home(request):
         elif BUTTON_SEARCH_KEY in request.POST:
             search(request, context)
         else:
-            insert(request, context)
+            return insert(request)
     return render(request, 'webui/home2.html', context)
 
 
@@ -52,11 +51,16 @@ def delete(request, context):
             pass
 
 
-def insert(request, context):
+def insert(request):
     table_name = request.POST.get(REQUEST_TABLE_KEY, None)
     if table_name:
         model = apps.get_model('webui', table_name)
-        
+        form_name = model.__name__ + 'Form'
+        form_class = globals()[form_name]
+        form = form_class(request.POST)
+        print(2)
+        return render(request, 'webui/insert.html', {"form": form})
+
 
 
 def search(request, context):
@@ -73,10 +77,6 @@ def search(request, context):
             pass
     elif table_name:
         context['data'] = [x.__dict__ for x in model.objects.all()]
-
-
-def insert(request):
-    return render(request, 'webui/insert.html')
 
 
 def about(request):

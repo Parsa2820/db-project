@@ -1,5 +1,5 @@
 from django.forms import ModelForm, Textarea
-from models import *
+from .models import *
 
 class CardForm(ModelForm):
     class Meta:
