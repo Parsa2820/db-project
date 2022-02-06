@@ -12,6 +12,7 @@
 <body>
     <form method="post">
         <select name="table">
+            <option value="">Select an entity</option>
             {% for table in tables %}
             <option value="{{table}}">{{table}}</option>
             {% endfor %}
