@@ -11,12 +11,12 @@
 <body>
     <form action="">
         <select name="table">
-            <option value="">Select an entity</option>
+            {% for table in tables %}
+                <option value="{{table}}">{{table}}</option>
+            {% endfor %}
         </select>
-        <select name="field">
-            <option value="">Select a field</option>
-        </select>
-        <input type="text" name="field-value" placeholder="Value for selected field">
+        <input type="text" name="column" placeholder="Entity field">
+        <input type="text" name="value" placeholder="Value for selected field">
         <input type="submit" value="Search">
     </form>
     <table>

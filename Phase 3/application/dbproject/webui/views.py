@@ -4,11 +4,13 @@ from django.http import HttpResponse
 from django.db import connection
 from matplotlib.style import context
 
-
+TABLES = [x for x in connection.introspection.table_names() if not x.startswith('auth_') and not x.startswith('django_')]
+REQUEST_FIELD_KEY = 'field'
+REQUEST_VALUE_KEY = 'field-value'
 
 def home(request):
     context = {
-        'tables': connection.introspection.table_names(),
+        'tables': TABLES,
         'header': [],
         'data': []
     }
