@@ -6,29 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    {% load dicttag %}
 </head>
 
 <body>
-    <form action="">
+    <form method="post">
         <select name="table">
             {% for table in tables %}
-                <option value="{{table}}">{{table}}</option>
+            <option value="{{table}}">{{table}}</option>
             {% endfor %}
         </select>
         <input type="text" name="column" placeholder="Entity field">
         <input type="text" name="value" placeholder="Value for selected field">
         <input type="submit" value="Search">
+        {% csrf_token %}
     </form>
     <table>
         <thead>
             <tr>
-                <th>Field name</th>
+                {% for h in header %}
+                <th>{{h}}</th>
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
+            {% for d in data %}
             <tr>
-                <td>Search to get output table</td>
+                {% for h in header %}
+                <td>{{d|get_value:h}}</td>
+                {% endfor %}
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </body>

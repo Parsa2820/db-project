@@ -3,8 +3,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
 from matplotlib.style import context
+from django.db.models import Field
+from django.apps import apps
 
-TABLES = [x for x in connection.introspection.table_names() if not x.startswith('auth_') and not x.startswith('django_')]
+
+TABLES = [x.__name__ for x in apps.get_models() if not x.__name__.startswith('Auth') and not x.__name__.startswith('Django')]
 REQUEST_FIELD_KEY = 'field'
 REQUEST_VALUE_KEY = 'field-value'
 
@@ -15,12 +18,10 @@ def home(request):
         'data': []
     }
     if request.method == 'POST':
-        search_id = request.POST.get('textfield', None)
-        try:
-            user = str(search_id)
-            # fill context
-        except Exception:
-            return HttpResponse("Not a query!")
+        table_name = request.POST.get('table', None)
+        model = apps.get_model('webui', table_name)
+        context['header'] = [x.name for x in model._meta.get_fields() if isinstance(x, Field)]
+        context['data'] = [x.__dict__ for x in model.objects.all()]
     return render(request, 'webui/home.html', context)
 
 def about(request):
