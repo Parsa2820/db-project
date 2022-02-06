@@ -19,7 +19,8 @@
         </select>
         <input type="text" name="column" placeholder="Entity field">
         <input type="text" name="value" placeholder="Value for selected field">
-        <input type="submit" value="Search">
+        <input type="submit" name="search" value="Search">
+        <input type="submit" name="delete" value="Delete">
         {% csrf_token %}
     </form>
     <table>
