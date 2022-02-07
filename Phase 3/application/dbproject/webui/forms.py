@@ -1,4 +1,4 @@
-from django.forms import *
+from django.forms import ModelForm, TextInput
 from .models import *
 
 class CardForm(ModelForm):

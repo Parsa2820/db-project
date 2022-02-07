@@ -39,6 +39,8 @@ def home(request):
             search(request, context)
         elif BUTTON_INSERT_KEY in request.POST:
             return redirect('webui-insert')
+    print(len(context['data']))
+    print(context['header'])
     return render(request, 'webui/home2.html', context)
 
 
@@ -103,16 +105,18 @@ def search(request, context):
     table_name = request.POST.get(REQUEST_TABLE_KEY, None)
     field_name = request.POST.get(REQUEST_FIELD_KEY, None)
     field_value = request.POST.get(REQUEST_VALUE_KEY, None)
+    print(f'{table_name=} {field_name=} {field_value=}')
     if table_name:
         model = apps.get_model('webui', table_name)
         context['header'] = [x.name for x in model._meta.get_fields() if isinstance(x, Field)]
     if table_name and field_name:
         try:
-            context['data'] = [model_to_dict(x) for x in model.objects.filter(**{field_name: field_value})]
+            context['data'] = [x.__dict__ for x in model.objects.filter(**{field_name: field_value})]
         except FieldError:
             pass
     elif table_name:
         context['data'] = [x.__dict__ for x in model.objects.all()]
+    print(context)
 
 
 def about(request):
