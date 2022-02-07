@@ -6,7 +6,20 @@ DROP TABLE IF EXISTS BankAccount CASCADE;
 DROP TABLE IF EXISTS QarzolHasana CASCADE;
 DROP TABLE IF EXISTS Saving CASCADE;
 DROP TABLE IF EXISTS _Card CASCADE;
+DROP TABLE IF EXISTS support CASCADE;
 DROP TYPE IF EXISTS weekdayenum CASCADE;
+DROP TABLE IF EXISTS _transaction CASCADE;
+DROP TABLE IF EXISTS purchase CASCADE;
+DROP TABLE IF EXISTS paybill CASCADE;
+DROP TABLE IF EXISTS wiretransfer CASCADE;
+DROP TABLE IF EXISTS deposit CASCADE;
+DROP TABLE IF EXISTS withdraw CASCADE;
+DROP TABLE IF EXISTS userrequest CASCADE;
+DROP TABLE IF EXISTS createbankaccountrequest CASCADE;
+DROP TABLE IF EXISTS createcardrequest CASCADE;
+DROP TYPE IF EXISTS accounttype CASCADE;
+DROP TYPE IF EXISTS weekdayenum CASCADE;
+DROP TYPE IF EXISTS userrequeststatus CASCADE;
 
 
 
@@ -25,8 +38,7 @@ CREATE TABLE Employee (
     country varchar(50),
     city varchar(50),
     addresExtra text,
-    PRIMARY KEY(nationalId),
-    CHECK (EXTRACT (YEAR from age(CURRENT_TIMESTAMP, birthDate::timestamp)) > 18)
+    PRIMARY KEY(nationalId)
 );
 
 -- weekday enum
@@ -47,6 +59,8 @@ CREATE TABLE EmployeeSchedule (
     endHour time,
     PRIMARY KEY(emplyeeNationalId, _weekDay),
     FOREIGN KEY(emplyeeNationalId) REFERENCES Employee(nationalId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE RealPerson (
@@ -61,8 +75,7 @@ CREATE TABLE RealPerson (
     country varchar(50),
     city varchar(50),
     addresExtra text,
-    PRIMARY KEY(nationalId),
-    CHECK (EXTRACT (YEAR from age(CURRENT_TIMESTAMP, birthDate::timestamp)) > 18)
+    PRIMARY KEY(nationalId)
 );
 
 CREATE TABLE Account (
@@ -73,10 +86,12 @@ CREATE TABLE Account (
     phoneNumber char(10),
     PRIMARY KEY(username),
     FOREIGN KEY(realPersonNationalId) REFERENCES RealPerson(nationalId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE BankAccount (
-    id serial,
+    id int,
     active boolean,
     balance money,
     iban char(24),
@@ -84,12 +99,16 @@ CREATE TABLE BankAccount (
     creatorUsername varchar(30),
     PRIMARY KEY(id),
     FOREIGN KEY(creatorUsername) REFERENCES Account(username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE QarzolHasana (
     id int,
     PRIMARY KEY(id),
     FOREIGN KEY(id) REFERENCES BankAccount(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE Saving (
@@ -101,6 +120,8 @@ CREATE TABLE Saving (
     ),
     PRIMARY KEY(id),
     FOREIGN KEY(id) REFERENCES BankAccount(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE _Card (
@@ -114,19 +135,25 @@ CREATE TABLE _Card (
     bankAccount int,
     PRIMARY KEY(cardNumber),
     FOREIGN KEY(bankAccount) REFERENCES BankAccount(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE _Transaction (
-    transactionId bigserial,
+    transactionId bigint,
     source int,
     destination int,
     _date date,
     _description text,
     amount money,
-    trackingId bigserial,
+    trackingId bigint,
     PRIMARY KEY(transactionId),
-    FOREIGN KEY(source) REFERENCES BankAccount(id),
+    FOREIGN KEY(source) REFERENCES BankAccount(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
     FOREIGN KEY(destination) REFERENCES BankAccount(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE Purchase (
@@ -134,6 +161,8 @@ CREATE TABLE Purchase (
     storeName varchar(100),
     PRIMARY KEY(transactionId),
     FOREIGN KEY(transactionId) REFERENCES _Transaction(transactionId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE PayBill (
@@ -142,31 +171,39 @@ CREATE TABLE PayBill (
     paymentId varchar(13),
     PRIMARY KEY(transactionId),
     FOREIGN KEY(transactionId) REFERENCES _Transaction(transactionId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE WireTransfer (
     transactionId bigint,
     PRIMARY KEY(transactionId),
     FOREIGN KEY(transactionId) REFERENCES _Transaction(transactionId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE Deposit (
     transactionId bigint,
     PRIMARY KEY(transactionId),
     FOREIGN KEY(transactionId) REFERENCES _Transaction(transactionId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE Withdraw (
     transactionId bigint,
     PRIMARY KEY(transactionId),
     FOREIGN KEY(transactionId) REFERENCES _Transaction(transactionId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 -- user request status enum
 CREATE TYPE userrequeststatus AS ENUM ('Pending', 'Done', 'Rejected');
 
 CREATE TABLE UserRequest (
-    requestId bigserial,
+    requestId bigint,
     _status userrequeststatus,
     _date date,
     response text,
@@ -182,16 +219,24 @@ CREATE TABLE CreateBankAccountRequest (
     username varchar(30),
     bankAccountType accounttype,
     PRIMARY KEY(requestId),
-    FOREIGN KEY(requestId) REFERENCES UserRequest(requestId),
+    FOREIGN KEY(requestId) REFERENCES UserRequest(requestId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
     FOREIGN KEY(username) REFERENCES Account(username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE CreateCardRequest (
     requestId bigint,
     bankAccountId int,
     PRIMARY KEY(requestId),
-    FOREIGN KEY(requestId) REFERENCES UserRequest(requestId),
+    FOREIGN KEY(requestId) REFERENCES UserRequest(requestId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
     FOREIGN KEY(bankAccountId) REFERENCES BankAccount(id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
 CREATE TABLE Support (
@@ -199,7 +244,13 @@ CREATE TABLE Support (
     username varchar(30),
     employeeNationId char(10),
     PRIMARY KEY(requestId),
-    FOREIGN KEY(requestId) REFERENCES UserRequest(requestId),
-    FOREIGN KEY(username) REFERENCES Account(username),
+    FOREIGN KEY(requestId) REFERENCES UserRequest(requestId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    FOREIGN KEY(username) REFERENCES Account(username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
     FOREIGN KEY(employeeNationId) REFERENCES Employee(nationalId)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
