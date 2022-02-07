@@ -368,7 +368,7 @@ insert into BankAccount(
 )
 
 VALUES(
-    '121444',
+    121444,
     'True',
     '1111444',
     '1111111111111111111444',
@@ -390,7 +390,7 @@ insert into Saving(
 )
 
 VALUES(
-    1212444,
+    1212443,
     0.1
 );
 
@@ -428,8 +428,8 @@ insert into _Transaction(
 
 VALUES(
     '1212444',
-    111111111111111111,
-    111111111111111444,
+    1212444,
+    1212443,
     '1/4/2020',
     'store',
     '11144',
@@ -531,4 +531,184 @@ VALUES(
     121444,
     'angela',
     '1111111444'
+);
+
+insert into  RealPerson(
+    nationalId,
+    firstName,
+    lastName,
+    fatherName,
+    birthDate,
+    mobileNumber,
+    landlineNumber,
+    postalCode,
+    country,
+    city,
+    addresExtra
+)
+
+VALUES(
+    '1111111155',
+    'jacob',
+    'obama',
+    'barak',
+    '1/1/1998',
+    '0911222355',
+    '0216666655',
+    '1231231255',
+    'france',
+    'paris',
+    '55 street'
+);
+
+insert into Employee(
+    nationalId,
+    firstName,
+    lastName,
+    fatherName,
+    birthDate,
+    mobileNumber,
+    landlineNumber,
+    _role,
+    monthlySalary,
+    startDate,
+    postalCode,
+    country,
+    city,
+    addresExtra
+)
+
+VALUES(
+    '1111111155',
+    'jacob',
+    'barak',
+    'obama',
+    '1/1/1998',
+    '0911222355',
+    '0216666655',
+    'Employee',
+    '1111155',
+    '1/5/2020',
+    '1231231255',
+    'france',
+    'paris',
+    '55 street'
+);
+
+insert into EmployeeSchedule (
+    emplyeeNationalId,
+    _weekDay,
+    startHour,
+    endHour
+)
+
+VALUES(
+    '1111111155',
+    'Saturday',
+    '8:00',
+    '16:00'
+);
+
+insert into Account(
+    realPersonNationalId,
+    username,
+    email,
+    accountPassword,
+    phoneNumber
+)
+
+VALUES(
+    '1111111155',
+    'jacob',
+    'jacob@gmail.com',
+    'f0e4c2f76c58916ec258f246851bea55',
+    '0912222255'
+);
+
+insert into BankAccount(
+    id,
+    active,
+    balance,
+    iban,
+    openDate,
+    creatorUsername
+)
+
+VALUES(
+    1212155,
+    'True',
+    '1111155',
+    '1111111111111111111155',
+    '1/5/2020',
+    'jacob'
+);
+
+insert into QarzolHasana(
+    id
+)
+
+VALUES(
+    1212155
+);
+
+insert into Saving(
+    id,
+    profit
+)
+
+VALUES(
+    1212155,
+    0.1
+);
+
+insert into _Card(
+    cardNumber,
+    primaryPassword,
+    secondaryPassword,
+    expirationDate,
+    CVV1,
+    CVV2,
+    active,
+    bankAccount
+)
+
+VALUES(
+    '111111111111111155',
+    '1155',
+    '11111155',
+    '1/5/2222',
+    '1155',
+    '1155',
+    'True',
+    121255
+);
+
+insert into _Transaction(
+    transactionId,
+    source,
+    destination,
+    _date,
+    _description,
+    amount,
+    trackingId
+)
+
+VALUES(
+    '1212155',
+    121212,
+    121255,
+    '1/5/2020',
+    'store',
+    '11155',
+    '123123155'
+);
+
+insert into Purchase(
+    transactionId,
+    storeName
+)
+
+VALUES(
+    1212155,
+    'digikala'
 );
