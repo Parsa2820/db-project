@@ -111,12 +111,25 @@ def search(request, context):
         context['header'] = [x.name for x in model._meta.get_fields() if isinstance(x, Field)]
     if table_name and field_name:
         try:
-            context['data'] = [x.__dict__ for x in model.objects.filter(**{field_name: field_value})]
+            row_dict = [x.__dict__ for x in model.objects.filter(**{field_name: field_value})]
+            for row in row_dict:
+                expanded_dict = {}
+                for key, value in row.items():
+                    if key.endswith('_id'):
+                        expanded_dict[key[:-3]] = value
+            row.update(expanded_dict)
+            context['data'] = row_dict
         except FieldError:
             pass
     elif table_name:
-        context['data'] = [x.__dict__ for x in model.objects.all()]
-    print(context)
+        row_dict = [x.__dict__ for x in model.objects.all()]
+        for row in row_dict:
+            expanded_dict = {}
+            for key, value in row.items():
+                if key.endswith('_id'):
+                    expanded_dict[key[:-3]] = value
+            row.update(expanded_dict)
+        context['data'] = row_dict
 
 
 def about(request):
