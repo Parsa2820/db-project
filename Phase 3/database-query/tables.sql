@@ -97,7 +97,7 @@ CREATE TABLE BankAccount (
     iban char(24) UNIQUE,
     openDate date,
     creatorUsername varchar(30),
-    CHECK (balance >= 0),
+    CHECK (balance::numeric >= 0),
     PRIMARY KEY(id),
     FOREIGN KEY(creatorUsername) REFERENCES Account(username)
     ON UPDATE CASCADE
@@ -148,6 +148,7 @@ CREATE TABLE _Transaction (
     _description text,
     amount money not null,
     trackingId bigint,
+    CHECK (amount::numeric > 0),
     PRIMARY KEY(transactionId),
     FOREIGN KEY(source) REFERENCES BankAccount(id)
     ON UPDATE CASCADE

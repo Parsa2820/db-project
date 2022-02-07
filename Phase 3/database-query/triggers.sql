@@ -1,7 +1,7 @@
-DROP TRIGGER account_password_hash_trigger ON Account;
-DROP TRIGGER card_passwords_hash_trigger ON _Card;
-DROP TRIGGER transaction_trigger ON _Transaction;
-DROP TRIGGER BankAccountCreate ON UserRequest;
+-- DROP TRIGGER account_password_hash_trigger ON Account;
+-- DROP TRIGGER card_passwords_hash_trigger ON _Card;
+-- DROP TRIGGER transaction_trigger ON _Transaction;
+-- DROP TRIGGER BankAccountCreate ON UserRequest;
 
 
 CREATE OR REPLACE FUNCTION hash_password()
