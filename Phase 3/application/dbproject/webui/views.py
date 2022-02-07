@@ -13,7 +13,7 @@ from .forms import *
 
 from pytest import Instance
 
-TABLES = [x.__name__ for x in apps.get_models() if not x.__name__.startswith('Auth') and not x.__name__.startswith('Django')]
+TABLES = [x.__name__ for x in apps.get_models() if not x.__name__.startswith('Auth') and not x.__name__.startswith('Django')][:-6]
 REQUEST_TABLE_KEY = 'table'
 REQUEST_FIELD_KEY = 'column'
 REQUEST_VALUE_KEY = 'value'
@@ -85,9 +85,13 @@ def insert(request):
                 row = {}
                 for pk in pks:
                     row[pk] = request.POST.get(pk, None)
-                obj = model.objects.get(**row)
-                form = form_class(request.POST, instance=obj)
-                form.save()
+                try:
+                    obj = model.objects.get(**row)
+                    form = form_class(request.POST, instance=obj)
+                    form.save()
+                except:
+                    # form not loaded yet
+                    return render(request, 'webui/insert2.html', {'tables': TABLES})
             return redirect("webui-home")
         elif BUTTON_CANCEL_KEY in request.POST:
             return redirect("webui-home")
