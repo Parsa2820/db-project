@@ -83,7 +83,7 @@ CREATE TABLE Account (
     username varchar(30),
     email varchar(50) not null,
     accountPassword char(32) not null,
-    phoneNumber char(10),
+    phoneNumber char(10) not null,
     PRIMARY KEY(username),
     FOREIGN KEY(realPersonNationalId) REFERENCES RealPerson(nationalId)
     ON UPDATE CASCADE
@@ -94,9 +94,10 @@ CREATE TABLE BankAccount (
     id int,
     active boolean,
     balance money,
-    iban char(24),
+    iban char(24) UNIQUE,
     openDate date,
     creatorUsername varchar(30),
+    CHECK (balance >= 0),
     PRIMARY KEY(id),
     FOREIGN KEY(creatorUsername) REFERENCES Account(username)
     ON UPDATE CASCADE
@@ -126,13 +127,13 @@ CREATE TABLE Saving (
 
 CREATE TABLE _Card (
     cardNumber varchar(19),
-    primaryPassword char(32),
-    secondaryPassword char(32),
-    expirationDate date,
-    CVV1 varchar(4),
-    CVV2 varchar(4),
-    active boolean,
-    bankAccount int,
+    primaryPassword char(32) not null,
+    secondaryPassword char(32) not null,
+    expirationDate date not null,
+    CVV1 varchar(4) not null,
+    CVV2 varchar(4) not null,
+    active boolean not null,
+    bankAccount int not null,
     PRIMARY KEY(cardNumber),
     FOREIGN KEY(bankAccount) REFERENCES BankAccount(id)
     ON UPDATE CASCADE
@@ -145,7 +146,7 @@ CREATE TABLE _Transaction (
     destination int,
     _date date,
     _description text,
-    amount money,
+    amount money not null,
     trackingId bigint,
     PRIMARY KEY(transactionId),
     FOREIGN KEY(source) REFERENCES BankAccount(id)
@@ -204,7 +205,7 @@ CREATE TYPE userrequeststatus AS ENUM ('Pending', 'Done', 'Rejected');
 
 CREATE TABLE UserRequest (
     requestId bigint,
-    _status userrequeststatus,
+    _status userrequeststatus not null,
     _date date,
     response text,
     _description text,
@@ -229,7 +230,7 @@ CREATE TABLE CreateBankAccountRequest (
 
 CREATE TABLE CreateCardRequest (
     requestId bigint,
-    bankAccountId int,
+    bankAccountId int not null,
     PRIMARY KEY(requestId),
     FOREIGN KEY(requestId) REFERENCES UserRequest(requestId)
     ON UPDATE CASCADE
