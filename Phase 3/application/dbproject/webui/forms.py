@@ -5,6 +5,9 @@ class CardForm(ModelForm):
     class Meta:
         model = Card
         fields = '__all__'
+        widgets = {
+            'test': Textarea()
+        }
 
 
 class TransactionForm(ModelForm):

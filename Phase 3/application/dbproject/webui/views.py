@@ -1,7 +1,8 @@
 from shutil import ExecError
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.http import HttpResponse, HttpResponseRedirect
 from django.db import connection
+from django.urls import reverse
 from matplotlib.pyplot import table
 from matplotlib.style import context
 from django.core.exceptions import FieldError
@@ -20,6 +21,9 @@ REQUEST_DELETE_TABLE_KEY = 'delete_table'
 REQUEST_DELETE_DATA_KEY = 'delete_data'
 BUTTON_SEARCH_KEY = 'search'
 BUTTON_DELETE_KEY = 'delete'
+BUTTON_INSERT_KEY = 'insert'
+BUTTON_GET_FORM_KEY = 'get_form'
+BUTTON_CANCEL_KEY = 'cancel'
 
 
 def home(request):
@@ -33,8 +37,8 @@ def home(request):
             delete(request, context)
         elif BUTTON_SEARCH_KEY in request.POST:
             search(request, context)
-        else:
-            return insert(request)
+        elif BUTTON_INSERT_KEY in request.POST:
+            return redirect('webui-insert')
     return render(request, 'webui/home2.html', context)
 
 
@@ -51,15 +55,43 @@ def delete(request, context):
             pass
 
 
-def insert(request):
+def init_insert(request):
     table_name = request.POST.get(REQUEST_TABLE_KEY, None)
     if table_name:
         model = apps.get_model('webui', table_name)
         form_name = model.__name__ + 'Form'
         form_class = globals()[form_name]
-        form = form_class(request.POST)
-        print(2)
-        return render(request, 'webui/insert.html', {"form": form})
+        form = form_class()
+        return render(request, 'webui/insert2.html', {'form': form, 'tables': [table_name]})
+    return HttpResponse('internal error: table name not found')
+
+
+
+def insert(request):
+    form = None
+    if request.method == 'POST':
+        if BUTTON_GET_FORM_KEY in request.POST:
+            return init_insert(request)
+        elif BUTTON_INSERT_KEY in request.POST:
+            table_name = request.POST.get(REQUEST_TABLE_KEY, None)
+            model = apps.get_model('webui', table_name)
+            form_name = model.__name__ + 'Form'
+            form_class = globals()[form_name]
+            form = form_class(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                pks = [x.name for x in model._meta.get_fields() if isinstance(x, Field) and x.primary_key]
+                row = {}
+                for pk in pks:
+                    row[pk] = request.POST.get(pk, None)
+                obj = model.objects.get(**row)
+                form = form_class(request.POST, instance=obj)
+                form.save()
+            return redirect("webui-home")
+        elif BUTTON_CANCEL_KEY in request.POST:
+            return redirect("webui-home")
+    return render(request, 'webui/insert2.html', {'tables': TABLES})
 
 
 
