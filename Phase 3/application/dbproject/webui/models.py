@@ -24,12 +24,13 @@ class Card(models.Model):
 
 
 class Transaction(models.Model):
-    transactionid = models.BigAutoField(primary_key=True)
-    source = models.ForeignKey('Bankaccount', models.DO_NOTHING, db_column='source', blank=True, null=True, related_name='src')
-    destination = models.ForeignKey('Bankaccount', models.DO_NOTHING, db_column='destination', blank=True, null=True, related_name='dst')
+    transactionid = models.BigIntegerField(primary_key=True)
+    source = models.ForeignKey('Bankaccount', models.DO_NOTHING, db_column='source', blank=True, null=True, related_name='transaction_source')
+    destination = models.ForeignKey('Bankaccount', models.DO_NOTHING, db_column='destination', blank=True, null=True, related_name='transaction_destination')
     field_date = models.DateField(db_column='_date', blank=True, null=True)  # Field renamed because it started with '_'.
     field_description = models.TextField(db_column='_description', blank=True, null=True)  # Field renamed because it started with '_'.
     amount = models.TextField(blank=True, null=True)  # This field type is a guess.
+    trackingid = models.BigIntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -118,6 +119,7 @@ class AuthUserUserPermissions(models.Model):
 
 
 class Bankaccount(models.Model):
+    id = models.IntegerField(primary_key=True)
     active = models.BooleanField(blank=True, null=True)
     balance = models.TextField(blank=True, null=True)  # This field type is a guess.
     iban = models.CharField(max_length=24, blank=True, null=True)
@@ -299,7 +301,7 @@ class Support(models.Model):
 
 
 class Userrequest(models.Model):
-    requestid = models.BigAutoField(primary_key=True)
+    requestid = models.BigIntegerField(primary_key=True)
     field_status = models.TextField(db_column='_status', blank=True, null=True)  # Field renamed because it started with '_'. This field type is a guess.
     field_date = models.DateField(db_column='_date', blank=True, null=True)  # Field renamed because it started with '_'.
     response = models.TextField(blank=True, null=True)

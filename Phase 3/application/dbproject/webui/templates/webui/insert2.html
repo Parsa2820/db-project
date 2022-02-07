@@ -15,12 +15,12 @@
         <div class="jumbotron" style="margin-top:20px;">
             <form method="post">
                 <div class=" form-inline" >
-                    <select name="table" class="table-primary form-control table-lg inputstl  mb-3 col-auto " style="min-width:250px;">
+                    <select name="table" class="table-primary form-control table-lg inputstl  mb-3" style="min-width:250px;">
                         {% for table in tables %}
                         <option value="{{table}}">{{table}}</option>
                         {% endfor %}
                     </select>
-                    <div class="btn-group btn-pill  mb-3">
+                    <div class="btn-group btn-pill col-auto mb-3">
                         <input class="btn btn-primary " name="get_form" type="submit" value="Get fields">
                         <input class="btn btn-success" name="insert" type="submit" value="Upsert">
                         <button class="btn btn-danger" name="cancel" type="button" value="Cancel" onclick="window.location.href='/webui'">Cancel</button>
