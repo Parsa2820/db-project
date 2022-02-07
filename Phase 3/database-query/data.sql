@@ -1,21 +1,4 @@
 
-insert into Employee (
-    nationalId 1111111112,
-    firstName azra,
-    lastName abi,
-    fatherName brim,
-    birthDate 1/1/2001,
-    mobileNumber 09112223345,
-    landlineNumber 0216666666,
-    _role Employee,
-    monthlySalary 1111111,
-    startDate 1/1/2020,
-    postalCode 1231231231,
-    country france,
-    city paris,
-    addresExtra main street
-);
-
 insert into  RealPerson(
     nationalId,
     firstName,
