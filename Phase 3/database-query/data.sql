@@ -11,20 +11,20 @@ insert into  RealPerson(
     country,
     city,
     addresExtra
-);
+)
 
 VALUES(
     1111111112,
-    azra,
-    abi,
-    brim,
-    1/1/2001,
+    'azra',
+    'abi',
+    'brim',
+    '1/1/2001',
     09112223345,
     0216666666,
     1231231231,
-    france,
-    paris,
-    main street
+    'france',
+    'paris',
+    'main street'
 );
 
 insert into Employee(
@@ -42,23 +42,23 @@ insert into Employee(
     country,
     city,
     addresExtra
-);
+)
 
 VALUES(
     1111111112,
-    azra,
-    abi,
-    brim,
-    1/1/2001,
+    'azra',
+    'abi',
+    'brim',
+    '1/1/2001',
     09112223345,
     0216666666,
-    Employee,
+    'Employee',
     1111111,
-    1/1/2020,
+    '1/1/2020',
     1231231231,
-    france,
-    paris,
-    main street
+    'france',
+    'paris',
+    'main street'
 );
 
 insert into EmployeeSchedule (
@@ -66,13 +66,13 @@ insert into EmployeeSchedule (
     _weekDay,
     startHour,
     endHour
-);
+)
 
 VALUES(
     1111111112,
-    Saturday,
-    1/1/2020,
-    2:30
+    'Saturday',
+    '1/1/2020',
+   
 );
 
 insert into Account(
@@ -81,11 +81,11 @@ insert into Account(
     email,
     accountPassword,
     phoneNumber
-);
+)
 
 VALUES(
     1111111112,
-    azra,
+    'azra',
 );
 
 insert into BankAccount(
@@ -95,29 +95,29 @@ insert into BankAccount(
     iban,
     openDate,
     creatorUsername
-);
+)
 
 VALUES(
     121212,
-    True,
+    'True',
     1111111,
     1111111111111111111111,
-    1/2/2020,
-    azra
+    '1/2/2020',
+    'azra'
 );
 
 insert into QarzolHasana(
     id
-);
+)
 
 VALUES(
-    1212121
+    '1212121'
 );
 
 insert into Saving(
     id,
     profit
-);
+)
 
 VALUES(
     1212121,
@@ -133,16 +133,16 @@ insert into _Card(
     CVV2,
     active,
     bankAccount
-);
+)
 
 VALUES(
     111111111111111111,
     1111,
     11111111,
-    1/1/2222,
+    '1/1/2222',
     1111,
     1111,
-    True,
+    'True',
     121212
 );
 
@@ -154,14 +154,14 @@ insert into _Transaction(
     _description,
     amount,
     trackingId
-);
+)
 
 VALUES(
     1212121,
     111111111111111111,
     111111111111111112,
-    1/3/2020,
-    store,
+    '1/3/2020',
+    'store',
     11111,
     123123123
 );
@@ -169,18 +169,18 @@ VALUES(
 insert into Purchase(
     transactionId,
     storeName
-);
+)
 
 VALUES(
     1212121,
-    digikala
+    'digikala'
 );
 
 insert into PayBill(
     transactionId,
     billId,
     paymentId
-);
+)
 
 VALUES(
     1212121,
@@ -190,14 +190,15 @@ VALUES(
 
 insert into WireTransfer(
     transactionId
-);
+)
+
 VALUES(
     1212121
 );
 
 insert into Deposit(
     transactionId
-);
+)
 
 VALUES(
     1212121
@@ -205,7 +206,7 @@ VALUES(
 
 insert into Withdraw(
     transactionId
-);
+)
 
 VALUES(
     1212121
@@ -217,14 +218,14 @@ insert into UserRequest(
     _date,
     response,
     _description
-);
+)
 
 VALUES(
     121212,
-    Done,
-    1/2/2020,
-    yes,
-    ok
+    'Done',
+    '1/2/2020',
+    'yes',
+    'ok'
 );
 
 
@@ -232,18 +233,19 @@ insert into CreateBankAccountRequest(
     requestId,
     username,
     bankAccountType
-);
+)
 
 VALUES(
     121212,
-    azra,
-    QarzolHasana
+    'azra',
+    'QarzolHasana'
 );
 
 insert into CreateCardRequest(
     requestId,
     bankAccountId
-);
+)
+
 VALUES(
     121212,
     121212
@@ -253,10 +255,10 @@ insert into Support(
     requestId,
     username,
     employeeNationId
-);
+)
 
 VALUES(
     121212,
-    azra,
+    'azra',
     1111111112
 );
