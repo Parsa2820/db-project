@@ -1,3 +1,39 @@
+DELETE FROM realperson;
+DELETE FROM employee;
+DELETE FROM employeeSchedule;
+DELETE FROM account;
+DELETE FROM bankAccount;
+DELETE FROM qarzolHasana;
+DELETE FROM saving;
+DELETE FROM _card;
+DELETE FROM _transaction;
+DELETE FROM purchase;
+DELETE FROM payBill;
+DELETE FROM wireTransfer;
+DELETE FROM deposit;
+DELETE FROM withdraw;
+DELETE FROM userRequest;
+DELETE FROM createBankAccountRequest;
+DELETE FROM createCardRequest;
+DELETE FROM support;
+DELETE FROM realperson;
+DELETE FROM employee;
+DELETE FROM employeeSchedule;
+DELETE FROM account;
+DELETE FROM bankAccount;
+DELETE FROM qarzolHasana;
+DELETE FROM saving;
+DELETE FROM _card;
+DELETE FROM _transaction;
+DELETE FROM purchase;
+DELETE FROM payBill;
+DELETE FROM wireTransfer;
+DELETE FROM deposit;
+DELETE FROM withdraw;
+DELETE FROM userRequest;
+DELETE FROM createBankAccountRequest;
+DELETE FROM createCardRequest;
+DELETE FROM support;
 
 insert into  RealPerson(
     nationalId,
@@ -101,10 +137,28 @@ insert into BankAccount(
 )
 
 VALUES(
-    '121212',
+    121212,
     'True',
     '1111111',
     '1111111111111111111111',
+    '1/2/2020',
+    'azra'
+);
+
+insert into BankAccount(
+    id,
+    active,
+    balance,
+    iban,
+    openDate,
+    creatorUsername
+)
+
+VALUES(
+    121213,
+    'True',
+    '1111111',
+    '1111111111111121111111',
     '1/2/2020',
     'azra'
 );
@@ -114,7 +168,7 @@ insert into QarzolHasana(
 )
 
 VALUES(
-    1212121
+    121212
 );
 
 insert into Saving(
@@ -123,7 +177,7 @@ insert into Saving(
 )
 
 VALUES(
-    1212121,
+    121213,
     0.1
 );
 
@@ -161,8 +215,8 @@ insert into _Transaction(
 
 VALUES(
     '1212121',
-    111111111111111111,
-    111111111111111112,
+    121212,
+    121213,
     '1/3/2020',
     'store',
     '11111',
@@ -381,17 +435,7 @@ insert into QarzolHasana(
 )
 
 VALUES(
-    1212444
-);
-
-insert into Saving(
-    id,
-    profit
-)
-
-VALUES(
-    1212443,
-    0.1
+    121444
 );
 
 insert into _Card(
@@ -428,8 +472,8 @@ insert into _Transaction(
 
 VALUES(
     '1212444',
-    1212444,
-    1212443,
+    121444,
+    121212,
     '1/4/2020',
     'store',
     '11144',
@@ -532,6 +576,7 @@ VALUES(
     'angela',
     '1111111444'
 );
+
 
 insert into  RealPerson(
     nationalId,
@@ -680,7 +725,7 @@ VALUES(
     '1155',
     '1155',
     'True',
-    121255
+    121444
 );
 
 insert into _Transaction(
@@ -696,7 +741,7 @@ insert into _Transaction(
 VALUES(
     '1212155',
     121212,
-    121255,
+    121444,
     '1/5/2020',
     'store',
     '11155',
