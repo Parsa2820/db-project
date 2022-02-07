@@ -25,18 +25,18 @@ DROP TYPE IF EXISTS userrequeststatus CASCADE;
 
 CREATE TABLE Employee (
     nationalId char(10),
-    firstName varchar(30),
-    lastName varchar(30),
-    fatherName varchar(30),
-    birthDate date check (EXTRACT (YEAR from age(CURRENT_TIMESTAMP, birthDate::timestamp)) > 18),
-    mobileNumber char(10),
-    landlineNumber varchar(10),
-    _role text,
-    monthlySalary money,
-    startDate date,
-    postalCode char(10),
-    country varchar(50),
-    city varchar(50),
+    firstName varchar(30) not null,
+    lastName varchar(30) not null,
+    fatherName varchar(30) not null,
+    birthDate date not null check (EXTRACT (YEAR from age(CURRENT_TIMESTAMP, birthDate::timestamp)) > 18),
+    mobileNumber char(10) not null,
+    landlineNumber varchar(10) not null,
+    _role text not null,
+    monthlySalary money not null,
+    startDate date not null,
+    postalCode char(10) not null,
+    country varchar(50) not null,
+    city varchar(50) not null,
     addresExtra text,
     PRIMARY KEY(nationalId)
 );
@@ -55,8 +55,8 @@ CREATE TYPE weekdayenum AS ENUM (
 CREATE TABLE EmployeeSchedule (
     emplyeeNationalId char(10),
     _weekDay weekdayenum,
-    startHour time,
-    endHour time,
+    startHour time not null,
+    endHour time not null,
     PRIMARY KEY(emplyeeNationalId, _weekDay),
     FOREIGN KEY(emplyeeNationalId) REFERENCES Employee(nationalId)
     ON UPDATE CASCADE
@@ -65,13 +65,13 @@ CREATE TABLE EmployeeSchedule (
 
 CREATE TABLE RealPerson (
     nationalId char(10),
-    firstName varchar(30),
-    lastName varchar(30),
-    fatherName varchar(30),
-    birthDate date check (EXTRACT (YEAR from age(CURRENT_TIMESTAMP, birthDate::timestamp)) > 18),
-    mobileNumber char(10),
+    firstName varchar(30) not null,
+    lastName varchar(30) not null,
+    fatherName varchar(30) not null,
+    birthDate date not null check (EXTRACT (YEAR from age(CURRENT_TIMESTAMP, birthDate::timestamp)) > 18),
+    mobileNumber char(10) not null,
     landlineNumber varchar(10),
-    postalCode char(10),
+    postalCode char(10) not null,
     country varchar(50),
     city varchar(50),
     addresExtra text,
@@ -79,9 +79,9 @@ CREATE TABLE RealPerson (
 );
 
 CREATE TABLE Account (
-    realPersonNationalId char(10),
+    realPersonNationalId char(10) not null,
     username varchar(30),
-    email varchar(50),
+    email varchar(50) not null,
     accountPassword char(32) not null,
     phoneNumber char(10),
     PRIMARY KEY(username),
