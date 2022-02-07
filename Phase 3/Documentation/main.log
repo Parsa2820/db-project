@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.10.5)  7 FEB 2022 20:43
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.10.5)  7 FEB 2022 22:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -375,16 +375,16 @@ Overfull \hbox (0.17586pt too wide) in paragraph at lines 58--60
 []\TU/XBZar(0)/m/n/10 در فاز صفر پروژه ابتدا نوع موجودیت‌های شرکت کننده در یک بانک الکترونیکی و هم‌چنین نیازمندی‌های[]
  []
 
-File: ../Phase 2 Modified.png Graphic file (type bmp)
-<../Phase 2 Modified.png>
+File: ../DB Project-Phase 2.png Graphic file (type bmp)
+<../DB Project-Phase 2.png>
 [1] [2] (./main.aux) ) 
 Here is how much of TeX's memory you used:
  6174 strings out of 479418
- 157696 string characters out of 5888105
- 486318 words of memory out of 5000000
+ 157708 string characters out of 5888105
+ 487318 words of memory out of 5000000
  23572 multiletter control sequences out of 15000+600000
  535290 words of font info for 60 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  52i,10n,74p,1141b,262s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (4 pages, 27316 bytes).
+Output written on main.xdv (4 pages, 28636 bytes).
