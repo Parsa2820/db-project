@@ -1,7 +1,0 @@
-\contentsline {section}{\numberline {1}فاز صفر}{1}%
-\contentsline {section}{\numberline {2}فاز اول}{1}%
-\contentsline {section}{\numberline {3}فاز دوم}{1}%
-\contentsline {section}{\numberline {4}فاز سوم}{1}%
-\contentsline {subsection}{\numberline {4.1}طراحی جداول به زبان \lr {SQL}}{1}%
-\contentsline {subsection}{\numberline {4.2}رهانا}{1}%
-\contentsline {subsection}{\numberline {4.3}طراحی و پیاده‌سازی برنامه کاربردی}{1}%
